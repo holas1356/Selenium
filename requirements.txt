@@ -1,2 +1,4 @@
-pytest
 selenium
+pytest
+webdriver-manager
+pyyaml
