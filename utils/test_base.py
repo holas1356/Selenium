@@ -7,11 +7,18 @@ URL = "https://isf-arro-qa-logstat.azurewebsites.net/"
 
 
 class LoginPageSelectors:
-    """
-    Class to define the Log in selectors.
-    """
     EMAIL_INPUT = (By.ID, "i0116")
     NEXT_BUTTON = (By.ID, "idSIButton9")
     PASSWORD_INPUT = (By.NAME, "passwd")
-    KEEP_SIGNED_BUTTON = (By.ID, "idSIButton9")
-    KEEP_SIGNED_BUTTON_NO = (By.ID, "idBtn_Back")
+    
+class ImportPageSelectors:
+    SYSTEM_ICON_LOCATOR = (By.CSS_SELECTOR, 'li > div.app-menu-system-group-div > p')
+    IMPORT_OPTION_LOCATOR = (By.XPATH, "//ul[@class='arro_navbar']/li[6]/div[1]/ul//a[contains(@href,'/Import')]//span[.='Import']")
+    IMPORT_DROPDOWN_LOCATOR = (By.ID, "importDropdown")
+    FILE_INPUT_LOCATOR = (By.ID, "file-input")
+    
+class LogisticsPageSelectors:
+    LOGISTICS_ICON_LOCATOR = (By.CSS_SELECTOR, 'li > div.app-menu-logistics-group-div > p')
+    INVENTORY_MASTER_OPTION_LOCATOR = (By.XPATH, "//ul[@class='arro_navbar']/li[4]/div[1]/ul//a[@href='https://isf-arro-qa-logstat.azurewebsites.net/InventoryMaster']//span[.='Inventory Master']")
+    
+
