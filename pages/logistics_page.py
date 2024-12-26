@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from utils.test_base import LogisticsPageSelectors
 from utils.browser_utils import wait_for_element
 from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException
 import os
 
 class LogisticsPage:
@@ -39,3 +40,7 @@ class LogisticsPage:
         nomenclature_field = wait_for_element(self.driver, self.nomenclature_field)
         nomenclature_field.clear()
         nomenclature_field.send_keys(nomenclature)
+        
+       
+        
+        

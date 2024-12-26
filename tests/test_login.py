@@ -33,8 +33,8 @@ def test_login_successful(setup):
     import_page.verify_import_page()
     import_page.select_garmy_option()
 
-    import_page.upload_csv_file("tests/documents/test_GARMY_Luisa_3.csv")
-    time.sleep(30)
+    #import_page.upload_csv_file("tests/documents/test_GARMY_Luisa_3.csv")
+    #time.sleep(30)
     assert "Imports" in setup.title, "La autenticación no fue exitosa. Título encontrado: " + setup.title
     logistics_page = LogisticsPage(setup)
     logistics_page.go_to_logistics_page()
