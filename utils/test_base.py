@@ -20,5 +20,8 @@ class ImportPageSelectors:
 class LogisticsPageSelectors:
     LOGISTICS_ICON_LOCATOR = (By.CSS_SELECTOR, 'li > div.app-menu-logistics-group-div > p')
     INVENTORY_MASTER_OPTION_LOCATOR = (By.XPATH, "//ul[@class='arro_navbar']/li[4]/div[1]/ul//a[@href='https://isf-arro-qa-logstat.azurewebsites.net/InventoryMaster']//span[.='Inventory Master']")
+    TACTICAL_TYPE_LOCATOR = (By.ID, "typeFilter")
+    NOMENCLATURE_FIELD = (By.XPATH, "/html//input[@id='nomenclatureFilter']")
+    
     
 

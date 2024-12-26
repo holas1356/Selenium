@@ -27,9 +27,8 @@ class ImportPage:
 
     def verify_import_page(self):
         import_url = os.getenv("IMPORT_URL")
-        expected_url = import_url
-        wait_for_element(self.driver, expected_url, EC.url_to_be)
-        assert self.driver.current_url == expected_url, f"Expected {expected_url} but got {self.driver.current_url}"
+        wait_for_element(self.driver, import_url, EC.url_to_be)
+        assert self.driver.current_url == import_url, f"Expected {import_url} but got {self.driver.current_url}"
         
     def select_garmy_option(self):
         import_dropdown = wait_for_element(self.driver, self.import_dropdown_locator, EC.visibility_of_element_located)
