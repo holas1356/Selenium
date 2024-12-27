@@ -20,13 +20,22 @@ jobs:
       with:
         python-version: "3.9"  # Configura la versión de Python que se usará
 
-    - name: Install Firefox and Geckodriver
+    - name: Install Google Chrome and ChromeDriver
       run: |
+          # Install Google Chrome and its dependencies
           sudo apt-get update
-          sudo apt-get install -y firefox-geckodriver
+          sudo apt-get install -y google-chrome-stable
+          # Install ChromeDriver (make sure the version is compatible with Chrome)
+          CHROME_VERSION=$(google-chrome-stable --version | awk '{print $3}' | sed 's/\.[0-9]*$//')
+          DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
+          wget https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin
 
-    - name: Run Selenium tests with Firefox
+    - name: Run Selenium tests with headless Chrome
       run: |
+          export DISPLAY=:99
+          google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 &
           python -m pytest --maxfail=1 --disable-warnings -q
 
     # Paso 3: Instalar dependencias desde requirements.txt
