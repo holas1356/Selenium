@@ -26,7 +26,7 @@ class ImportPage:
         import_option.click()
 
     def verify_import_page(self):
-        import_url = os.getenv("IMPORT_URL")
+        import_url = os.getenv("IMPORTS_URL")
         wait_for_element(self.driver, import_url, EC.url_to_be)
         assert self.driver.current_url == import_url, f"Expected {import_url} but got {self.driver.current_url}"
         

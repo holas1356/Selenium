@@ -30,6 +30,7 @@ class LoginPage:
             next_button.click()
 
     def enter_password(self, password):
+        time.sleep(2)
         password_field = wait_for_element(self.driver, self.password_field)
         password_field.clear() 
         password_field.send_keys(password)

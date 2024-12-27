@@ -1,0 +1,44 @@
+name: Run Automated Tests and Upload to Xray
+
+on:
+  schedule:
+    - cron: "0 6 * * *"  # Corre todos los días a las 6:00 AM
+  workflow_dispatch:  # Permite ejecución manual desde la interfaz de GitHub Actions
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest  # El pipeline correrá en un contenedor de Ubuntu
+
+    steps:
+    # Paso 1: Checkout del repositorio
+    - name: Checkout repository
+      uses: actions/checkout@v3  # Este paso obtiene el código del repositorio
+
+    # Paso 2: Configurar Python
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"  # Configura la versión de Python que se usará
+
+    # Paso 3: Instalar dependencias desde requirements.txt
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip  # Asegura que pip esté actualizado
+        pip install -r requirements.txt  # Instala las dependencias desde requirements.txt
+
+    - name: Upload results to Xray
+      env:
+        CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }} 
+      run: |
+        python script_xray.py  # Ejecuta el script para subir el archivo XML a Xray
+
+    # Paso 5: Ejecutar pruebas automatizadas
+    - name: Run tests
+      run: |
+        pytest --junitxml=results.xml  # Ejecuta las pruebas y genera un archivo de resultados en formato XML
+
+    # Paso 6: Subir resultados a Xray
+    - name: Upload results to Xray
+      run: |
+        python xray_integration.py  # Ejecuta el script para subir el archivo XML a Xray
