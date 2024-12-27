@@ -3,9 +3,3 @@ pytest
 webdriver-manager
 pyyaml
 requests
-
-# Ejecuta las pruebas de Selenium
-pytest.main(["--junitxml=resultado.xml"])
-
-# Llama al script de integración con Xray
-subprocess.run(["python", "xray_integration.py"])
