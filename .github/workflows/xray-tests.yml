@@ -22,17 +22,18 @@ jobs:
 
     - name: Install Google Chrome and ChromeDriver
       run: |
-          # Install Google Chrome and its dependencies
+          # Install Google Chrome and dependencies
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          # Install ChromeDriver (make sure the version is compatible with Chrome)
+          # Install ChromeDriver (download the latest version)
           CHROME_VERSION=$(google-chrome-stable --version | awk '{print $3}' | sed 's/\.[0-9]*$//')
-          DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
+          DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
           wget https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin
+          sudo chmod +x /usr/local/bin/chromedriver
 
-    - name: Run Selenium tests with headless Chrome
+     - name: Run Selenium tests with headless Chrome
       run: |
           export DISPLAY=:99
           google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 &
