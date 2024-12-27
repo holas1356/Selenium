@@ -31,7 +31,7 @@ jobs:
         CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
         CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }} 
       run: |
-        python script_xray.py  # Ejecuta el script para subir el archivo XML a Xray
+        python xray_integration.py  # Ejecuta el script para subir el archivo XML a Xray
 
     # Paso 5: Ejecutar pruebas automatizadas
     - name: Run tests
