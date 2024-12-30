@@ -25,7 +25,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip  # Asegura que pip esté actualizado
         pip install -r requirements.txt  # Instala las dependencias desde requirements.txt
-        
+
     - name: Install Google Chrome and ChromeDriver
       run: |
           # Install Google Chrome and dependencies
@@ -49,8 +49,9 @@ jobs:
 
     - name: Upload results to Xray
       env:
-        CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
-        CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }} 
+        BASE_URL: ${{ secrets.BASE_URL }}
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }} 
       run: |
         python xray_integration.py  # Ejecuta el script para subir el archivo XML a Xray
 
