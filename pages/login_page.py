@@ -13,6 +13,9 @@ class LoginPage:
         self.email_field = LoginPageSelectors.EMAIL_INPUT
         self.password_field = LoginPageSelectors.PASSWORD_INPUT
         self.next_button = LoginPageSelectors.NEXT_BUTTON
+        
+        self.CODE_NUMBER = (By.XPATH, "//*[@id='idRichContext_DisplaySign']")
+ 
  
     
 
@@ -35,7 +38,11 @@ class LoginPage:
         password_field.clear() 
         password_field.send_keys(password)
         
-
+    def print_code(self):
+        """Print the code number"""
+        code_number = wait_for_element(self.driver,self.CODE_NUMBER)
+        return code_number.text
+    
     def confirm_sign_in(self):
         self.click_next()
        
@@ -45,6 +52,7 @@ class LoginPage:
         self.click_next()
         self.enter_password(password)
         self.click_next()
+        print("Código de autenticación: ", self.print_code())
         self.confirm_sign_in()
 
         if "Home" in self.driver.title:
