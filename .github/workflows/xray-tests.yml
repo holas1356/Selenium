@@ -31,27 +31,6 @@ jobs:
         python -m pip install --upgrade pip  # Asegura que pip esté actualizado
         pip install -r requirements.txt  # Instala las dependencias desde requirements.txt
 
-    """- name: Install Google Chrome and ChromeDriver
-      run: |
-          # Install Google Chrome and dependencies
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          # Install ChromeDriver (download the latest version)
-          CHROME_VERSION=$(google-chrome-stable --version | awk '{print $3}' | sed 's/\.[0-9]*$//')
-          DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin
-          sudo chmod +x /usr/local/bin/chromedriver
-
-    - name: Run Selenium tests with headless Chrome
-      run: |
-          export DISPLAY=:99
-          google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 &
-          python -m pytest --maxfail=1 --disable-warnings -q"""
-
-    
-
     #- name: Upload results to Xray
       #env:
         #AUTH_URL: ${{ secrets.AUTH_URL }}
