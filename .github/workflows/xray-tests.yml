@@ -64,7 +64,7 @@ jobs:
     # Paso 5: Ejecutar pruebas automatizadas
     - name: Run tests
       run: |
-        python -s # Ejecuta las pruebas y genera un archivo de resultados en formato XML pytest --junitxml=results.xml 
+        python -s  # Ejecuta las pruebas y genera un archivo de resultados en formato XML pytest --junitxml=results.xml 
 
     # Paso 6: Subir resultados a Xray
     #- name: Upload results to Xray
