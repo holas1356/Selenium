@@ -17,6 +17,7 @@ def setup():
     driver = init_driver()
 
     base_url = os.getenv("BASE_URL")
+    print (base_url)
     driver.get(base_url)
     
     yield driver
