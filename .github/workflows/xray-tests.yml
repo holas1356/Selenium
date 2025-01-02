@@ -4,7 +4,12 @@ on:
   schedule:
     - cron: "0 6 * * *"  # Corre todos los días a las 6:00 AM
   workflow_dispatch:  # Permite ejecución manual desde la interfaz de GitHub Actions
-
+env:
+  BASE_URL: ${{ secrets.BASE_URL }}
+  IMPORTS_URL: ${{ secrets.IMPORTS_URL }}
+  INVENTORY_URL: ${{ secrets.INVENTORY_URL }}
+  EMAIL: ${{ secrets.EMAIL }}
+  PASSWORD: ${{ secrets.PASSWORD }}
 jobs:
   run-tests:
     runs-on: ubuntu-latest  # El pipeline correrá en un contenedor de Ubuntu
@@ -49,16 +54,17 @@ jobs:
 
     - name: Upload results to Xray
       env:
-        BASE_URL: ${{ variables.BASE_URL }}
+        AUTH_URL: ${{ secrets.AUTH_URL }}
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }} 
+        IMPORT_URL: ${{ secrets.IMPORT_URL }}
       run: |
         python xray_integration.py  # Ejecuta el script para subir el archivo XML a Xray
 
     # Paso 5: Ejecutar pruebas automatizadas
     - name: Run tests
       run: |
-        pytest --junitxml=results.xml  # Ejecuta las pruebas y genera un archivo de resultados en formato XML
+        pytest -s --junitxml=results.xml  # Ejecuta las pruebas y genera un archivo de resultados en formato XML
 
     # Paso 6: Subir resultados a Xray
     - name: Upload results to Xray
