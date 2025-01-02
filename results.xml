@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="56.242" timestamp="2025-01-02T08:16:36.338469-05:00" hostname="DESKTOP-JNVQD19"><testcase classname="tests.test_login" name="test_login_successful" time="53.731"><failure message="selenium.common.exceptions.TimeoutException: Message:">setup = &lt;selenium.webdriver.chrome.webdriver.WebDriver (session="b78daa305c3ae3b28f75ed4a9e61aa16")&gt;
+
+    def test_login_successful(setup):
+        email = os.getenv("EMAIL")
+        password = os.getenv("PASSWORD")
+        login_page = LoginPage(setup)
+&gt;       login_page.login(email, password)
+
+tests\test_login.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pages\login_page.py:56: in login
+    self.confirm_sign_in()
+pages\login_page.py:47: in confirm_sign_in
+    self.click_next()
+pages\login_page.py:29: in click_next
+    next_button = wait_for_element(self.driver, self.next_button, EC.element_to_be_clickable)
+utils\browser_utils.py:31: in wait_for_element
+    return WebDriverWait(driver, timeout).until(condition(locator))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;selenium.webdriver.support.wait.WebDriverWait (session="b78daa305c3ae3b28f75ed4a9e61aa16")&gt;, method = &lt;function element_to_be_clickable.&lt;locals&gt;._predicate at 0x000001C5E2D66340&gt;, message = ''
+
+    def until(self, method: Callable[[D], Union[Literal[False], T]], message: str = "") -&gt; T:
+        """Calls the method provided with the driver as an argument until the \
+        return value does not evaluate to ``False``.
+    
+        :param method: callable(WebDriver)
+        :param message: optional message for :exc:`TimeoutException`
+        :returns: the result of the last call to `method`
+        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs
+        """
+        screen = None
+        stacktrace = None
+    
+        end_time = time.monotonic() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, "screen", None)
+                stacktrace = getattr(exc, "stacktrace", None)
+            if time.monotonic() &gt; end_time:
+                break
+            time.sleep(self._poll)
+&gt;       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message:
+
+..\..\AppData\Local\Programs\Python\Python313\Lib\site-packages\selenium\webdriver\support\wait.py:105: TimeoutException</failure></testcase></testsuite></testsuites>
