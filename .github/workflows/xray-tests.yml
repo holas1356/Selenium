@@ -52,21 +52,17 @@ jobs:
 
     
 
-    - name: Upload results to Xray
-      env:
-        AUTH_URL: ${{ secrets.AUTH_URL }}
-        CLIENT_ID: ${{ secrets.CLIENT_ID }}
-        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }} 
-        IMPORT_URL: ${{ secrets.IMPORT_URL }}
-      run: |
-        python xray_integration.py  # Ejecuta el script para subir el archivo XML a Xray
+    #- name: Upload results to Xray
+      #env:
+        #AUTH_URL: ${{ secrets.AUTH_URL }}
+        #CLIENT_ID: ${{ secrets.CLIENT_ID }}
+       # CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }} 
+       # IMPORT_URL: ${{ secrets.IMPORT_URL }}
+      #run: |
+        #python xray_integration.py  # Ejecuta el script para subir el archivo XML a Xray
 
     # Paso 5: Ejecutar pruebas automatizadas
     - name: Run tests
       run: |
         pytest -s  # Ejecuta las pruebas y genera un archivo de resultados en formato XML pytest --junitxml=results.xml 
 
-    # Paso 6: Subir resultados a Xray
-    #- name: Upload results to Xray
-      #run: |
-        #python xray_integration.py  # Ejecuta el script para subir el archivo XML a Xray
